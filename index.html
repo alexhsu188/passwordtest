@@ -1,69 +1,134 @@
+
 <!DOCTYPE html>
-<html >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <!-- Site made with Mobirise Website Builder v4.7.1, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.7.1, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo4.png" type="image/x-icon">
-  <meta name="description" content="">
-  <title>Home</title>
-  <link rel="stylesheet" href="assets/tether/tether.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/soundcloud-plugin/style.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-  
+<title></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
+
+<style>
+
+body {
+	
+	background-image: url('grunge_patterns.jpg');
+	background-attachment: fixed;
+	color: #333;
+}
+
+.box {
+	border-radius: 3px;
+	background: rgba(101, 101, 101, 0.7); margin: auto; padding: 12px;
+}
+
+.lightbox {
+	zoom: 1.5;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(10, 10, 10, 0.8);
+	text-align: center;
+	margin: auto;
+	
+}
+
+div.horizontal {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+
+div.vertical {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+
+::-webkit-input-placeholder {
+   color: #955;
+   text-align: center;
+}
+
+::-moz-placeholder {  
+   color: #955;
+   text-align: center;
+}
+
+:-ms-input-placeholder {  
+   color: #955;
+   text-align: center;
+}
+
+</style>
+
 <body>
-  <section class="countdown2 cid-qPugT9XQdd" id="countdown2-0">
-
-    
-
-    
-
-    <div class="container">
-        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">
-            Countdown
-        </h2>
-        <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
-            Responsive countdown on the panel with text. Use the block parameters to show/hide texts, change panel and countdown colors and other.
-        </h3>
-    </div>
-    <div class="container pt-5 mt-2">
-        <div class=" countdown-cont align-center p-4">
-            <div class="event-name align-left mbr-white ">
-                <h4 class="mbr-fonts-style display-5">EVENT NAME</h4>
-            </div>
-            <div class="countdown align-center py-2" data-due-date="2018/04/27">
-            </div>
-            <div class="daysCountdown" title="Days"></div>
-            <div class="hoursCountdown" title="Hours"></div>
-            <div class="minutesCountdown" title="Minutes"></div>
-            <div class="secondsCountdown" title="Seconds"></div>
-            <div class="event-date align-left mbr-white">
-                <h5 class="mbr-fonts-style display-7">2018/01/01 - Lorem ipsum</h5>
-            </div>
-        </div>
-
-        
-    </div>
-</section>
+	
+	<div id="loginbox" class="lightbox" >
+		<div class="horizontal">
+			<div class="vertical">
+				<div class="box">				
+					<input style="margin: 16px; text-align: center;" id="password" type="password" placeholder="password" /> <br />
+					<button id="loginbutton" type="button">Enter</button>
+					<p id="wrongPassword" style="display: none">wrong password</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-  <section class="engine"><a href="https://mobirise.ws/j">design your own website</a></section><script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/popper/popper.min.js"></script>
-  <script src="assets/tether/tether.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/countdown/jquery.countdown.min.js"></script>
-  <script src="assets/theme/js/script.js"></script>
-  
-  
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	 
+
+	 <script type="text/javascript" src="https://cdn.rawgit.com/chrisveness/crypto/master/sha1.js"></script>
+
+	<script type="text/javascript">
+	"use strict";
+
+
+	function loadPage(pwd) {
+		
+		var hash= pwd;
+		hash= Sha1.hash(pwd);
+		var url= hash + "/index.html";
+			
+		$.ajax({
+			url : url,
+			dataType : "html",
+			success : function(data) {
+
+				window.location= url;
+
+			},
+			error : function(xhr, ajaxOptions, thrownError) {
+			
+
+				parent.location.hash= hash;
+
+				//$("#wrongPassword").show();
+				$("#password").attr("placeholder","wrong password");
+				$("#password").val("");
+			}
+		});
+	}
+
+	 
+	$("#loginbutton").on("click", function() {
+		loadPage($("#password").val());
+	});
+	$("#password").keypress(function(e) {
+		if (e.which == 13) {
+			
+			loadPage($("#password").val());
+		}
+	});
+	$("#password").focus();
+		
+	</script>
+
 </body>
 </html>
